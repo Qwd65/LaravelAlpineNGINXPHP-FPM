@@ -1,4 +1,4 @@
 
-## Laravel + Alpine + NGINX + PHP-FPM + OPCache + Docker
+## Laravel + Alpine + NGINX + PHP-FPM
 
-main
+Для запуска клонировать репозиторий и выполнить команду `docker compose up --build `  
