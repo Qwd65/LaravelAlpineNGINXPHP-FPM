@@ -23,9 +23,6 @@ rm -rf public/storage
 
 php artisan storage:link
 
-chown -R www-data:www-data /opt/laravel
-chmod -R 755 /opt/laravel/storage
-chmod -R 777 /opt/laravel/storage/framework/views/
 
 
 php artisan migrate --force
