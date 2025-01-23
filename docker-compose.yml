@@ -1,7 +1,6 @@
 services:
   laravel:
     build: .
-    container_name: laravel
     environment:
       PHP_OPCACHE_ENABLE: 1
     ports:
@@ -28,7 +27,7 @@ services:
       timeout: 10s
 
   adminer:
-    image: adminer
+    image: adminer:4.8.1
     ports:
       - 8081:8080
 
