@@ -1,4 +1,4 @@
-FROM alpine:latest as builder
+FROM alpine:3.21.2 as builder
 
 RUN apk --no-cache add \
     postgresql-dev \
@@ -36,7 +36,7 @@ RUN  composer install --no-interaction --no-scripts
 RUN npm install && npm run build
 
 
-FROM alpine:latest
+FROM alpine:3.21.2
 
 RUN apk --no-cache add \
     nginx \
@@ -84,7 +84,8 @@ RUN chown -R www-data:www-data /opt/laravel \
     chown -R www-data:www-data /var/log && \
     chmod -R 777 /var/log && \
     chmod 777 /var/run && \
-    chown www-data:www-data /var/run 
+    chown www-data:www-data /var/run && \ 
+    chmod -R 775 /opt/laravel/storage/framework/views/ 
 
 RUN touch /var/log/cron.log
 
@@ -92,8 +93,8 @@ RUN echo "* * * * * /usr/local/bin/php /opt/laravel/artisan schedule:run >> /var
 
 EXPOSE 80
 
-COPY entrypoint.sh /root/entrypoint.sh
+COPY entrypoint.sh /opt/entrypoint.sh
 
-RUN chmod +x /root/entrypoint.sh
+RUN chmod +x /opt/entrypoint.sh
 
-ENTRYPOINT ["/root/entrypoint.sh"]
+ENTRYPOINT ["/opt/entrypoint.sh"]
